@@ -1,24 +1,17 @@
----
+clickhouse_version: "24.8.4.13"
+clickhouse_cluster_name: "my"
 
 clickhouse_shards:
-  - ["shard1",
-      - { host: "clickhouse01" }
-      - { host: "clickhouse02" }]
-  - ["shard2",
-      - { host: "clickhouse03" }
-      - { host: "clickhouse04" }]
+  - shard: 01
+    replicas:
+      - name: clickhouse01
+        replica: 01
+      - name: clickhouse02
+        replica: 02
 
-clickhouse_cluster_keepers:
-  - id: 1
-    host: "zk1.example.com"
-    port: 2181
-  - id: 2
-    host: "zk2.example.com"
-    port: 2181
-  - id: 3
-    host: "zk3.example.com"
-    port: 2181
-
-creds:
-  user_default:
-    password: "{{ pass_clickhouse }}"
+  - shard: 02
+    replicas:
+      - name: clickhouse03
+        replica: 01
+      - name: clickhouse04
+        replica: 02

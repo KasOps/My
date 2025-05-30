@@ -6,5 +6,5 @@
   any_errors_fatal: true
 
   roles:
-    - role: clickhouse
+    - role: services/clickhouse
       tags: ['clickhouse']

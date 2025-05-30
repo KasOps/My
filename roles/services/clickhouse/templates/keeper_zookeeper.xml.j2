@@ -1,0 +1,14 @@
+<clickhouse>
+    <zookeeper>
+     {% for node in chkeeper_nodes %}
+         <node index="{{ node.myid }}">
+            <host>{{ node.name }}</host>
+            <port>9181</port>
+          </node>
+     {% endfor %}
+    </zookeeper>
+
+       <session_timeout_ms>30000</session_timeout_ms>
+       <operation_timeout_ms>10000</operation_timeout_ms>
+
+</clickhouse>

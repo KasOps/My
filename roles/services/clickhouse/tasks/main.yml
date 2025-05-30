@@ -5,6 +5,3 @@
 
 - include_tasks: configure-clickhouse.yml
   tags: [clickhouse]
-
-- include_tasks: configure-clickhouse-keeper.yml
-  tags: [clickhouse_keeper]

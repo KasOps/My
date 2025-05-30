@@ -1,0 +1,47 @@
+<clickhouse>
+    <remote_servers>
+	<{{ clickhouse_cluster_name }}>
+{% for shard in clickhouse_shards %}
+	    <shard>
+            <internal_replication>true</internal_replication>
+{% for replica in shard.replicas %}
+            <replica>
+                <host>{{ replica.ip }}</host>
+                <port>{{ replica.port }}</port>
+                <user>{{ replica.user }}</user>
+                <password>{{ replica.password }}</password>
+            </replica>
+{% endfor %}
+	    </shard>
+{% endfor %}
+        </{{ clickhouse_cluster_name }}>
+    </remote_servers>
+
+    <macros>
+       <shard>{{ shard_id }}</shard>
+       <replica>{{ replica_id }}</replica>
+    </macros>
+
+    <default_replica_path>/clickhouse/tables/{shard}/{database}/{table}</default_replica_path>
+    <default_replica_name>{replica}</default_replica_name>
+
+ <!-- Same for hosts without support for IPv6: -->
+     <listen_host>0.0.0.0</listen_host>
+
+     <interserver_http_host>{{ ansible_host }}</interserver_http_host>
+
+
+     <ttl_only_drop_parts>1</ttl_only_drop_parts>
+     
+     <user_directories>
+        <users_xml>
+            <!-- Path to configuration file with predefined users. -->
+            <path>/etc/clickhouse-server/users.d/users.xml</path>
+        </users_xml>
+        <local_directory>
+            <!-- Path to folder where users created by SQL commands are stored. -->
+            <path>/var/lib/clickhouse/access/</path>
+        </local_directory>
+     </user_directories>
+
+</clickhouse>
