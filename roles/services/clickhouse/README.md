@@ -18,32 +18,6 @@ It installs ClickHouse from the official Yandex repository, manages configuratio
 
 ---
 
-Role Structure
-python
-Копировать
-Редактировать
-roles/
-└── services/
-    └── clickhouse/
-        ├── defaults/
-        │   └── main.yml           # Default variables
-        ├── handlers/
-        │   └── main.yml           # Handlers (e.g., restart clickhouse)
-        ├── tasks/
-        │   ├── main.yml           # Main tasks (install, configure)
-        │   ├── install.yml        # Installation tasks
-        │   ├── config.yml         # Configuration file setup
-        │   └── service.yml        # Service management
-        ├── templates/
-        │   ├── config.xml.j2      # Main config template
-        │   ├── users.xml.j2       # Users config template
-        │   └── zookeeper.xml.j2   # ZooKeeper config template
-
-
-
-
----
-
 ## Requirements
 
 - Ansible 2.9 or higher  
