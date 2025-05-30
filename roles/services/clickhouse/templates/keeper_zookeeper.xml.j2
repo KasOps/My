@@ -1,6 +1,6 @@
 <clickhouse>
     <zookeeper>
-     {% for node in chkeeper_nodes %}
+     {% for node in keeper %}
          <node index="{{ node.myid }}">
             <host>{{ node.name }}</host>
             <port>9181</port>

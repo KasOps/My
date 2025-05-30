@@ -1,17 +1,35 @@
 clickhouse_version: "24.8.4.13"
-clickhouse_cluster_name: "my"
+clickhouse_cluster_name: clickhouse_cluster
 
+# Define shard and replicas together with hosts and IP in one structure
 clickhouse_shards:
-  - shard: 01
+  - id: 1
     replicas:
-      - name: clickhouse01
-        replica: 01
-      - name: clickhouse02
-        replica: 02
+      - host: clickhouse01
+        ip: 192.168.1.101
+        replica_id: 1
+      - host: clickhouse02
+        ip: 192.168.1.102
+        replica_id: 2
+  - id: 2
+    replicas:
+      - host: clickhouse03
+        ip: 192.168.1.103
+        replica_id: 1
+      - host: clickhouse04
+        ip: 192.168.1.104
+        replica_id: 2
 
-  - shard: 02
-    replicas:
-      - name: clickhouse03
-        replica: 01
-      - name: clickhouse04
-        replica: 02
+creds:
+  user_default:
+    password: "SuperSecretPassword"
+
+keeper:
+  - host: clickhouse01
+    port: 9181
+  - host: clickhouse02
+    port: 9181
+  - host: clickhouse03
+    port: 9181
+  - host: clickhouse04
+    port: 9181

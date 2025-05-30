@@ -40,3 +40,4 @@
     state: present
     update_cache: yes
   notify: restart clickhouse-server
+  

@@ -1,5 +1,12 @@
-[clickhouse]
-clickhouse01 ansible_host=<DNS_NAME_OR_IP> 
-clickhouse02 ansible_host=<DNS_NAME_OR_IP>
-clickhouse03 ansible_host=<DNS_NAME_OR_IP>
-clickhouse04 ansible_host=<DNS_NAME_OR_IP>
+---
+
+[clickhouse_cluster]
+clickhouse01 ansible_host=192.168.1.101
+clickhouse02 ansible_host=192.168.1.102
+clickhouse03 ansible_host=192.168.1.103
+clickhouse04 ansible_host=192.168.1.104
+
+[zookeeper]
+keeper01 ansible_host=192.168.1.201
+keeper02 ansible_host=192.168.1.201
+keeper03 ansible_host=192.168.1.201

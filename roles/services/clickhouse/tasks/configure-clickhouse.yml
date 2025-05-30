@@ -23,7 +23,7 @@
 
 - name: Create chkeeper directory
   file:
-    path: "{{ chkeeper_data_directory }}"
+    path: "{{ item }}"
     state: directory
     owner: clickhouse
     group: clickhouse
@@ -50,3 +50,5 @@
     - { src: "logging.xml.j2",        dest: "/etc/clickhouse-server/config.d/logging.xml" }
     - { src: "users.xml.j2",          dest: "/etc/clickhouse-server/users.d/users.xml" }
     - { src: "clikhouse-keeper.xml.j2",          dest: "/etc/clickhouse-keeper/clikhouse-keeper.xml" }
+  notify: restart clickhouse
+  when: clickhouse_version is defined
