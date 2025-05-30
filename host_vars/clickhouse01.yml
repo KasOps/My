@@ -1,0 +1,3 @@
+---
+clickhouse_shard_id: "1"
+clickhouse_replica_id: "1"

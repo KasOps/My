@@ -1,0 +1,11 @@
+<zookeeper>
+  <node index="0">
+    {% for keeper in clickhouse_cluster_keepers %}
+    <server>
+      <id>{{ keeper.id }}</id>
+      <host>{{ keeper.host }}</host>
+      <port>{{ keeper.port }}</port>
+    </server>
+    {% endfor %}
+  </node>
+</zookeeper>

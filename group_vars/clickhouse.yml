@@ -1,0 +1,24 @@
+---
+
+clickhouse_shards:
+  - ["shard1",
+      - { host: "clickhouse01" }
+      - { host: "clickhouse02" }]
+  - ["shard2",
+      - { host: "clickhouse03" }
+      - { host: "clickhouse04" }]
+
+clickhouse_cluster_keepers:
+  - id: 1
+    host: "zk1.example.com"
+    port: 2181
+  - id: 2
+    host: "zk2.example.com"
+    port: 2181
+  - id: 3
+    host: "zk3.example.com"
+    port: 2181
+
+creds:
+  user_default:
+    password: "{{ pass_clickhouse }}"

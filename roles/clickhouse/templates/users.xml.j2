@@ -1,0 +1,26 @@
+<clickhouse>
+    <profiles>
+        <default>
+            <max_memory_usage>100931731456</max_memory_usage>
+            <optimize_on_insert>1</optimize_on_insert>
+            <distributed_directory_monitor_batch_inserts>1</distributed_directory_monitor_batch_inserts>
+            <log_queries>1</log_queries>
+            <log_query_threads>0</log_query_threads>
+            <load_balancing>random</load_balancing>
+        </default>
+        <readonly>
+            <readonly>0</readonly>
+        </readonly>
+    </profiles>
+    <users>
+        <default>
+            <password>{{ pass_clickhouse }}</password>
+            <profile>default</profile>
+            <quota>default</quota>
+            <access_management>1</access_management>
+            <named_collection_control>1</named_collection_control>
+            <show_named_collections>1</show_named_collections>
+            <show_named_collections_secrets>1</show_named_collections_secrets>
+        </default>
+    </users>
+</clickhouse>

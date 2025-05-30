@@ -1,0 +1,10 @@
+---
+- name: Deploy ClickHouse cluster
+  hosts: clickhouse
+  gather_facts: yes
+  become: yes
+  any_errors_fatal: true
+
+  roles:
+    - role: clickhouse
+      tags: ['clickhouse']

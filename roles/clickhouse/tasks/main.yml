@@ -1,0 +1,10 @@
+---
+
+- include_tasks: install-clickhouse.yml
+  tags: [install]
+
+- include_tasks: configure-clickhouse.yml
+  tags: [clickhouse]
+
+- include_tasks: configure-clickhouse-keeper.yml
+  tags: [clickhouse_keeper]

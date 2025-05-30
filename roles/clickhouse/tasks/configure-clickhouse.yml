@@ -1,0 +1,39 @@
+---
+- name: Add clickhouse hosts to /etc/hosts
+  blockinfile:
+    path: /etc/hosts
+    marker: "# {mark} clickhouse"
+    block: |
+      {% for host in ip_clickhouse %}
+      {{ host.ip }} {{ host.name }}
+      {% endfor %}
+
+- name: Create ClickHouse directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: clickhouse
+    group: clickhouse
+    mode: '0750'
+  loop:
+    - /data/clickhouse
+    - /data/clickhouse/tmp
+    - /data/clickhouse/user_files
+    - /data/clickhouse/format_schemas
+
+- name: Deploy ClickHouse configuration templates
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: clickhouse
+    group: clickhouse
+    mode: '0644'
+  loop:
+    - { src: "clusters.xml.j2",       dest: "/etc/clickhouse-server/config.d/clusters.xml" }
+    - { src: "datadirs.xml.j2",       dest: "/etc/clickhouse-server/config.d/datadirs.xml" }
+    - { src: "merge_tree_settings.xml.j2", dest: "/etc/clickhouse-server/config.d/merge_tree_settings.xml" }
+    - { src: "prometheus.xml.j2",     dest: "/etc/clickhouse-server/config.d/prometheus.xml" }
+    - { src: "storage.xml.j2",        dest: "/etc/clickhouse-server/config.d/storage.xml" }
+    - { src: "zookeeper.xml.j2",      dest: "/etc/clickhouse-server/config.d/zookeeper.xml" }
+    - { src: "logging.xml.j2",        dest: "/etc/clickhouse-server/config.d/logging.xml" }
+    - { src: "users.xml.j2",          dest: "/etc/clickhouse-server/users.d/users.xml" }

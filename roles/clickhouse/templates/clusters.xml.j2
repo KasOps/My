@@ -1,0 +1,28 @@
+<clickhouse>
+    <remote_servers>
+        <{{ clickhouse_cluster_name }}>
+        {% for shard in clickhouse_shards %}
+            <shard><!-- {{ shard[0] }} -->
+                <internal_replication>true</internal_replication>
+                {% for repl in shard[1] %}
+                <replica>
+                    <host>{{ repl.host }}</host>
+                    <port>9000</port>
+                    <user>default</user>
+                    <password>{{ creds.user_default.password }}</password>
+                </replica>
+                {% endfor %}
+            </shard>
+        {% endfor %}
+        </{{ clickhouse_cluster_name }}>
+    </remote_servers>
+    <macros>
+        <shard>{{ clickhouse_shard_id }}</shard>
+        <replica>{{ clickhouse_replica_id }}</replica>
+    </macros>
+    <default_replica_path>/clickhouse/tables/{shard}/{database}/{table}</default_replica_path>
+    <default_replica_name>{replica}</default_replica_name>
+    <listen_host>0.0.0.0</listen_host>
+    <interserver_http_host>{{ ansible_host }}</interserver_http_host>
+    <ttl_only_drop_parts>1</ttl_only_drop_parts>
+</clickhouse>

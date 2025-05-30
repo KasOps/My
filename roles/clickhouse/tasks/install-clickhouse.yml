@@ -1,0 +1,42 @@
+---
+- name: Install required packages
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+    state: present
+    update_cache: yes
+
+- name: Download ClickHouse GPG key
+  get_url:
+    url: https://packages.clickhouse.com/rpm/lts/repodata/repomd.xml.key
+    dest: /usr/share/keyrings/clickhouse-keyring.gpg
+    mode: '0644'
+
+- name: Get system architecture
+  command: dpkg --print-architecture
+  register: arch_result
+  changed_when: false
+
+- name: Add ClickHouse APT repository
+  copy:
+    dest: /etc/apt/sources.list.d/clickhouse.list
+    content: |
+      deb [signed-by=/usr/share/keyrings/clickhouse-keyring.gpg arch={{ arch_result.stdout }}] https://packages.clickhouse.com/deb stable main
+    mode: '0644'
+
+- name: Update APT cache
+  apt:
+    update_cache: yes
+
+- name: Install ClickHouse packages
+  apt:
+    name:
+      - clickhouse-common-static-{{ clickhouse_version }}
+      - clickhouse-client-{{ clickhouse_version }}
+      - clickhouse-server-{{ clickhouse_version }}
+    state: present
+    update_cache: yes
+  notify: restart clickhouse-server

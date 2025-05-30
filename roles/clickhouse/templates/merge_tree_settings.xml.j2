@@ -1,0 +1,10 @@
+<clickhouse>
+    <merge_tree>
+        <ttl_only_drop_parts>1</ttl_only_drop_parts>
+        <max_replicated_merges_with_ttl_in_queue>2</max_replicated_merges_with_ttl_in_queue>
+        <max_number_of_merges_with_ttl_in_pool>4</max_number_of_merges_with_ttl_in_pool>
+        <parts_to_delay_insert>300</parts_to_delay_insert>
+        <max_delay_to_insert>10</max_delay_to_insert>
+        <replicated_deduplication_window>300</replicated_deduplication_window>
+    </merge_tree>
+</clickhouse>

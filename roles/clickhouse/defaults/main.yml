@@ -1,0 +1,16 @@
+---
+
+clickhouse_packages:
+  - clickhouse-client
+  - clickhouse-server
+
+chkeeper_data_directory:
+  - "/data/chkeeper/"
+  - "/data/chkeeper/log"
+  - "/data/chkeeper/snapshots"
+
+pass_clickhouse: "password"
+
+clickhouse_version: "24.8.4.13"
+
+clickhouse_cluster_name: "my"
