@@ -17,10 +17,10 @@ For the first disk:
 
 ```bash
 parted /dev/nvme0n1 --script mklabel gpt
-parted /dev/nvme0n1 --script mkpart primary fat32 1MiB 1128MiB
+parted /dev/nvme0n1 --script mkpart primary fat32 1MiB 513MiB
 parted /dev/nvme0n1 --script set 1 boot on
 parted /dev/nvme0n1 --script set 1 esp on
-parted /dev/nvme0n1 --script mkpart primary 1128MiB 100%
+parted /dev/nvme0n1 --script mkpart primary 513MiB 100%
 ```
 
 Repeat for the remaining disks:
@@ -28,10 +28,10 @@ Repeat for the remaining disks:
 ```bash
 for disk in /dev/nvme1n1 /dev/nvme2n1 /dev/nvme3n1; do
   parted "$disk" --script mklabel gpt
-  parted "$disk" --script mkpart primary fat32 1MiB 1128MiB
+  parted "$disk" --script mkpart primary fat32 1MiB 513MiB
   parted "$disk" --script set 1 boot on
   parted "$disk" --script set 1 esp on
-  parted "$disk" --script mkpart primary 1128MiB 100%
+  parted "$disk" --script mkpart primary 513MiB 100%
 done
 ```
 
