@@ -166,6 +166,7 @@ UUID=7B1F-36F2 /boot/efi vfat umask=0077 0 1
 
 ```bash
 mount /boot/efi
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=ubuntu --recheck
 dpkg-reconfigure grub-efi-amd64
 update-grub
 ```
